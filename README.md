@@ -1,8 +1,20 @@
 # Crystal Jewels - 3D Luxury Jewelry Website
 
-A stunning, responsive luxury jewelry website featuring 3D interactive ring models, elegant animations, and a premium e-commerce experience.
+A stunning, responsive luxury jewelry website featuring 3D interactive ring models, elegant animations, and a premium e-commerce experience with cart functionality and WhatsApp integration.
 
-🌟 **Live Demo**: [https://sahasra-jewelers.netlify.app/](https://sahasra-jewelers.netlify.app/)
+## 🚀 **Live Deployments**
+
+🌟 **Primary Site (Netlify)**: [https://sahasra-jewelers.netlify.app/](https://sahasra-jewelers.netlify.app/)
+
+⚡ **Alternative Site (Vercel)**: [https://sahasra-3-d-jewels-website.vercel.app/](https://sahasra-3-d-jewels-website.vercel.app/)
+
+> Both deployments feature the complete e-commerce experience with cart carousel, WhatsApp checkout integration (+91 7330775225), and 3D jewelry visualization.
+
+### 📊 **Deployment Status**
+| Platform | Status | URL | Features |
+|----------|---------|-----|----------|
+| 🌟 Netlify | ✅ Live | [sahasra-jewelers.netlify.app](https://sahasra-jewelers.netlify.app/) | Primary deployment, CDN optimized |
+| ⚡ Vercel | ✅ Live | [sahasra-3-d-jewels-website.vercel.app](https://sahasra-3-d-jewels-website.vercel.app/) | Alternative deployment, Edge functions |
 
 ## ✨ Features
 
@@ -213,11 +225,15 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - WebGI for 3D rendering capabilities
 - Tailwind CSS for utility-first styling
 - Google Fonts for typography
-- Netlify for hosting
+- Netlify & Vercel for hosting
 
-## 📞 Contact
+## 📞 Contact & Links
 
-**Website**: [https://sahasra-jewelers.netlify.app/](https://sahasra-jewelers.netlify.app/)
+**Primary Website**: [https://sahasra-jewelers.netlify.app/](https://sahasra-jewelers.netlify.app/)
+
+**Alternative Website**: [https://sahasra-3-d-jewels-website.vercel.app/](https://sahasra-3-d-jewels-website.vercel.app/)
+
+**WhatsApp Business**: +91 7330775225
 
 **Repository**: [https://github.com/T-sashi-pavan/Sahasra-3D-Jewels-Website](https://github.com/T-sashi-pavan/Sahasra-3D-Jewels-Website)
 
