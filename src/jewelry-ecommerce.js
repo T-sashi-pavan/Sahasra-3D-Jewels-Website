@@ -103,9 +103,14 @@ const jewelryData = {
     ]
 };
 
-// Shopping cart
-let cart = [];
+// Enhanced Shopping cart with localStorage
+let cart = JSON.parse(localStorage.getItem('jewelryCart')) || [];
 let cartTotal = 0;
+
+// Save cart to localStorage
+function saveCart() {
+    localStorage.setItem('jewelryCart', JSON.stringify(cart));
+}
 
 // Current page
 let currentPage = 'home';
@@ -117,6 +122,10 @@ window.toggleMobileMenu = toggleMobileMenu;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.clearCart = clearCart;
+window.updateQuantity = updateQuantity;
+window.whatsappCheckout = whatsappCheckout;
+window.buyNow = buyNow;
+window.checkout = checkout;
 
 // Initialize the website
 document.addEventListener('DOMContentLoaded', function() {
@@ -280,13 +289,25 @@ function toggleMobileMenu() {
     mobileMenu.classList.toggle('hidden');
 }
 
-// Cart functionality
+// Enhanced Cart functionality with overlay and WhatsApp integration
 function toggleCart() {
-    const cartSidebar = document.getElementById('cart-sidebar');
-    cartSidebar.classList.toggle('translate-x-full');
+    const sidebar = document.getElementById('cart-sidebar');
+    const overlay = document.getElementById('cart-overlay');
+    
+    const isOpen = sidebar.classList.contains('active');
+    
+    if (isOpen) {
+        sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    } else {
+        sidebar.classList.add('active');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
-function addToCart(category, index) {
+function addToCart(category, index, event) {
     const item = jewelryData[category][index];
     const cartItem = {
         id: `${category}-${index}`,
@@ -294,24 +315,74 @@ function addToCart(category, index) {
         price: item.price,
         category: category,
         video: item.video,
-        quantity: 1
+        quantity: 1,
+        description: item.description || '',
+        image: item.image || 'assets/images/default.png'
     };
+    
+    // Create flying animation if event is provided
+    if (event) {
+        const flyingElement = document.createElement('div');
+        flyingElement.innerHTML = '💎';
+        flyingElement.className = 'flying-to-cart';
+        
+        const rect = event.target.getBoundingClientRect();
+        flyingElement.style.position = 'fixed';
+        flyingElement.style.left = rect.left + 'px';
+        flyingElement.style.top = rect.top + 'px';
+        flyingElement.style.fontSize = '20px';
+        flyingElement.style.zIndex = '9999';
+        flyingElement.style.pointerEvents = 'none';
+        flyingElement.style.transition = 'all 0.5s ease-in-out';
+        
+        document.body.appendChild(flyingElement);
+
+        setTimeout(() => {
+            const cartIcon = document.querySelector('#cart-count').parentElement;
+            if (cartIcon) {
+                const cartRect = cartIcon.getBoundingClientRect();
+                flyingElement.style.left = cartRect.left + 'px';
+                flyingElement.style.top = cartRect.top + 'px';
+                flyingElement.style.transform = 'scale(0)';
+                flyingElement.style.opacity = '0';
+            }
+        }, 10);
+
+        setTimeout(() => {
+            if (flyingElement.parentNode) {
+                document.body.removeChild(flyingElement);
+            }
+        }, 500);
+    }
     
     // Check if item already exists in cart
     const existingItem = cart.find(item => item.id === cartItem.id);
     if (existingItem) {
         existingItem.quantity += 1;
+        showAddToCartNotification(`Updated ${item.name} quantity in cart ✨`);
     } else {
         cart.push(cartItem);
+        showAddToCartNotification(`${item.name} added to cart! ✨`);
     }
     
+    saveCart();
     updateCartDisplay();
-    showAddToCartNotification(item.name);
+    
+    // Pulse cart icon
+    const cartIcon = document.querySelector('#cart-count').parentElement;
+    if (cartIcon) {
+        cartIcon.style.animation = 'cartPulse 0.6s ease-in-out';
+        setTimeout(() => {
+            cartIcon.style.animation = '';
+        }, 600);
+    }
 }
 
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
+    saveCart();
     updateCartDisplay();
+    showAddToCartNotification('Item removed from cart');
 }
 
 function updateCartDisplay() {
@@ -319,35 +390,54 @@ function updateCartDisplay() {
     const cartItems = document.getElementById('cart-items');
     const cartTotalElement = document.getElementById('cart-total');
     
-    // Update cart count
+    if (!cartCount || !cartItems || !cartTotalElement) {
+        console.error('Cart elements not found');
+        return;
+    }
+    
+    // Update cart count with proper visibility
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
+    cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
     
     // Update cart total
     cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotalElement.textContent = cartTotal.toFixed(2);
     
-    // Update cart items display
-    cartItems.innerHTML = '';
-    cart.forEach(item => {
-        const cartItemElement = document.createElement('div');
-        cartItemElement.className = 'flex items-center justify-between p-4 bg-gray-50 rounded-lg';
-        cartItemElement.innerHTML = `
-            <div class="flex-1">
-                <h4 class="font-semibold text-sm">${item.name}</h4>
-                <p class="text-gray-600 text-xs">$${item.price.toFixed(2)} × ${item.quantity}</p>
-            </div>
-            <button onclick="removeFromCart('${item.id}')" class="text-red-500 hover:text-red-700">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        `;
-        cartItems.appendChild(cartItemElement);
-    });
-    
+    // Enhanced cart items display
     if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <svg class="w-20 h-20 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z"></path>
+                </svg>
+                <h3 class="text-lg font-semibold text-gray-600 mb-2">Your cart is empty</h3>
+                <p class="text-gray-400">No items in the cart yet</p>
+            </div>
+        `;
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item" data-id="${item.id}">
+                <img src="${item.image || 'assets/images/default.png'}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-semibold text-deep-black">${item.name}</h4>
+                    <p class="text-sm text-gray-500">${item.description || ''}</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-luxury-gold font-bold">$${item.price.toFixed(2)}</span>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" class="quantity-btn">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" class="quantity-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="removeFromCart('${item.id}')" class="remove-btn">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            </div>
+        `).join('');
     }
 }
 
@@ -380,10 +470,71 @@ function showAddToCartNotification(itemName) {
     }, 3000);
 }
 
+// Update quantity function
+function updateQuantity(itemId, newQuantity) {
+    if (newQuantity <= 0) {
+        removeFromCart(itemId);
+        return;
+    }
+    
+    const item = cart.find(item => item.id === itemId);
+    if (item) {
+        item.quantity = newQuantity;
+        saveCart();
+        updateCartDisplay();
+    }
+}
+
+// Clear cart function
+function clearCart() {
+    cart = [];
+    saveCart();
+    updateCartDisplay();
+    showAddToCartNotification('Cart cleared successfully');
+}
+
+// WhatsApp checkout function
+function whatsappCheckout() {
+    if (cart.length === 0) {
+        showAddToCartNotification('Your cart is empty!');
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    let message = "🌟 *Crystal Jewels Order* 🌟\n\n";
+    message += "💎 *Selected Items:*\n";
+    
+    cart.forEach(item => {
+        message += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+        message += `  ${item.description || 'Beautiful jewelry piece'}\n\n`;
+    });
+    
+    message += `💰 *Total Amount: $${total.toFixed(2)}*\n\n`;
+    message += "🚚 *Delivery Information:*\n";
+    message += "• Free delivery within 3-5 business days\n";
+    message += "• Express delivery available (24-48 hours)\n";
+    message += "• All items come with authenticity certificate\n\n";
+    message += "Please confirm your order and provide delivery address. Thank you for choosing Crystal Jewels! ✨";
+
+    const phoneNumber = "916304528287"; // +91 916304528287
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, '_blank');
+    
+    showAddToCartNotification('Redirecting to WhatsApp... 📱');
+}
+
 // Buy now functionality
 function buyNow(category, index) {
     addToCart(category, index);
     toggleCart();
+}
+
+// Checkout function (alias for WhatsApp checkout)
+function checkout() {
+    whatsappCheckout();
 }
 
 // Populate jewelry grids

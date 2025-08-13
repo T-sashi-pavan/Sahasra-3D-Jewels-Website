@@ -27,8 +27,12 @@
                         'warm-white': '#FAFAFA'
                     },
                     fontFamily: {
-                        'playfair': ['Playfair Display', 'Times New Roman', 'serif'],
-                        'poppins': ['Poppins', 'Arial', 'sans-serif']
+                        'decorative': ['Cinzel Decorative', 'Times New Roman', 'serif'],
+                        'elegant': ['Cinzel', 'Times New Roman', 'serif'],
+                        'playfair': ['Cinzel Decorative', 'Playfair Display', 'Times New Roman', 'serif'],
+                        'poppins': ['Cormorant Garamond', 'EB Garamond', 'Poppins', 'serif'],
+                        'gothic': ['Unna', 'serif'],
+                        'body': ['Cormorant Garamond', 'EB Garamond', 'serif']
                     }
                 }
             }
@@ -41,10 +45,11 @@
         body { 
             margin: 0; 
             padding: 0;
-            font-family: 'Poppins', sans-serif; 
+            font-family: 'Cormorant Garamond', 'EB Garamond', serif; 
             background: #FAFAFA;
             font-display: swap;
             overflow-x: hidden;
+            letter-spacing: 0.4px;
         }
         
         html {
@@ -101,19 +106,24 @@
         
         .hero-title {
             font-size: 4rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: bold;
+            font-family: 'Cinzel Decorative', 'Playfair Display', serif;
+            font-weight: 900;
             color: #1a1a1a;
             margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
         }
         
         .hero-description {
             font-size: 1.25rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
             color: #666;
             margin-bottom: 2rem;
             max-width: 48rem;
             margin-left: auto;
             margin-right: auto;
+            letter-spacing: 1px;
         }
         
         #webgi-canvas {
@@ -149,6 +159,104 @@
     
     <!-- Network Independence Script - Load First -->
     <script src="assets/js/network-independence.js" defer></script>
+    
+    <!-- Old English / Gothic Decorative Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Old English / Gothic Font Styling */
+        :root {
+            --font-decorative: 'Cinzel Decorative', 'Times New Roman', serif;
+            --font-elegant: 'Cinzel', 'Times New Roman', serif;
+            --font-body: 'Cormorant Garamond', 'EB Garamond', serif;
+            --font-gothic: 'Unna', serif;
+        }
+        
+        /* Global Font Override - Old English Style */
+        * {
+            font-family: var(--font-body) !important;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Decorative Headers - Old English Style */
+        h1, h2, h3, h4, h5, h6, 
+        .hero-title, 
+        .brand-name,
+        .simple-letter,
+        .welcome-text,
+        .jewels-text {
+            font-family: var(--font-decorative) !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+            font-style: normal;
+        }
+        
+        /* Navigation - Refined Gothic */
+        nav, .nav-link, .nav-container {
+            font-family: var(--font-elegant) !important;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        /* Body Text - Elegant Medieval Serif */
+        p, span, div, a, li, td, th {
+            font-family: var(--font-body) !important;
+            font-weight: 400;
+            letter-spacing: 0.4px;
+            line-height: 1.7;
+        }
+        
+        /* Button Text - Gothic Elegance */
+        button, .btn, input[type="button"] {
+            font-family: var(--font-elegant) !important;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-style: normal;
+        }
+        
+        /* Special Gothic Elements */
+        .category-card h3,
+        .product-title,
+        .collection-title {
+            font-family: var(--font-decorative) !important;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        /* Cart and Footer - Elegant */
+        #cart-sidebar,
+        footer {
+            font-family: var(--font-body) !important;
+        }
+        
+        /* Price and Important Text - Gothic */
+        .price, .cart-total, .hero-description {
+            font-family: var(--font-elegant) !important;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        /* Loading Screen Text - Ultra Decorative */
+        .simple-letter {
+            font-family: var(--font-decorative) !important;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-text, .jewels-text {
+            font-family: var(--font-elegant) !important;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+    </style>
     
     <!-- Meta Tags -->
     <meta name="description" content="Discover exquisite 3D jewelry collections at Sahasra Jewelers. Luxury rings, chains, bangles, earrings, and anklets crafted with precision.">
@@ -243,6 +351,60 @@
             40%, 43% { transform: translateY(-10px); }
             70% { transform: translateY(-5px); }
             90% { transform: translateY(-2px); }
+        }
+        
+        /* Luxury Footer Link Styling */
+        footer a {
+            color: #E8D5B0 !important; /* Champagne gold */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        footer a:hover {
+            color: #D4AF37 !important; /* Luxury gold */
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+        
+        footer a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #D4AF37, #F4D03F);
+            animation: underlineExpand 0.3s ease-out;
+        }
+        
+        @keyframes underlineExpand {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Override any existing link colors in footer */
+        footer .text-gray-300,
+        footer .text-blue-500,
+        footer .text-blue-600 {
+            color: #E8D5B0 !important;
+        }
+        
+        footer .text-gray-300:hover,
+        footer .text-blue-500:hover,
+        footer .text-blue-600:hover {
+            color: #D4AF37 !important;
         }
         
         .animate-bounce {
@@ -348,6 +510,86 @@
             backface-visibility: hidden;
         }
         
+        /* Mobile-Only Descriptive Text Styling */
+        .mobile-only-description {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Glass effect overlay for mobile description */
+        .mobile-only-description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(212, 175, 55, 0.05) 25%,
+                rgba(255, 255, 255, 0.08) 50%,
+                rgba(212, 175, 55, 0.03) 75%,
+                rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .mobile-only-description p {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Hide mobile description on larger screens */
+        @media (min-width: 640px) {
+            .mobile-only-description {
+                display: none !important;
+            }
+        }
+        
+        /* Video Card Responsive Improvements */
+        @media (max-width: 768px) {
+            .hero-video {
+                height: auto;
+                min-height: 250px;
+                max-height: 350px;
+                object-fit: cover; /* Use cover to fill container without empty space */
+                object-position: center; /* Center the video content */
+                background: #f8f8f8;
+                border-radius: 16px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+            
+            .hero-video.video-section {
+                width: 100%;
+                height: 280px; /* Fixed height for consistency */
+                object-fit: cover;
+                object-position: center;
+            }
+            
+            /* Specific styling for product card videos */
+            .video-card .hero-video,
+            #rings-grid .hero-video,
+            #chains-grid .hero-video,
+            #bangles-grid .hero-video,
+            #earrings-grid .hero-video,
+            #anklets-grid .hero-video {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 12px;
+                background: #f8f8f8;
+            }
+        }
+        
         /* Enhanced Responsive Design System */
         
         /* Extra Small Mobile Devices (320px - 374px) */
@@ -365,8 +607,26 @@
             }
             
             .hero-video {
-                height: 180px;
+                height: 200px;
+                min-height: 200px;
+                max-height: 220px;
                 border-radius: 15px;
+                object-fit: cover;
+                object-position: center;
+                background: #f8f8f8;
+                width: 100%;
+            }
+            
+            /* Product card videos for extra small mobile */
+            .video-card .hero-video,
+            #rings-grid .hero-video,
+            #chains-grid .hero-video,
+            #bangles-grid .hero-video,
+            #earrings-grid .hero-video,
+            #anklets-grid .hero-video {
+                height: 180px;
+                object-fit: cover;
+                object-position: center;
             }
             
             .video-player {
@@ -410,8 +670,26 @@
             }
             
             .hero-video {
-                height: 220px;
+                height: 250px;
+                min-height: 240px;
+                max-height: 270px;
                 border-radius: 18px;
+                object-fit: cover;
+                object-position: center;
+                background: #f8f8f8;
+                width: 100%;
+            }
+            
+            /* Product card videos for medium mobile */
+            .video-card .hero-video,
+            #rings-grid .hero-video,
+            #chains-grid .hero-video,
+            #bangles-grid .hero-video,
+            #earrings-grid .hero-video,
+            #anklets-grid .hero-video {
+                height: 200px;
+                object-fit: cover;
+                object-position: center;
             }
             
             .video-player {
@@ -437,6 +715,24 @@
             
             .hero-video {
                 height: 280px;
+                min-height: 260px;
+                max-height: 300px;
+                object-fit: cover;
+                object-position: center;
+                background: #f8f8f8;
+                width: 100%;
+            }
+            
+            /* Product card videos for medium mobile devices */
+            .video-card .hero-video,
+            #rings-grid .hero-video,
+            #chains-grid .hero-video,
+            #bangles-grid .hero-video,
+            #earrings-grid .hero-video,
+            #anklets-grid .hero-video {
+                height: 220px;
+                object-fit: cover;
+                object-position: center;
             }
             
             .video-player {
@@ -457,6 +753,24 @@
             
             .hero-video {
                 height: 320px;
+                min-height: 300px;
+                max-height: 350px;
+                object-fit: cover;
+                object-position: center;
+                background: #f8f8f8;
+                width: 100%;
+            }
+            
+            /* Product card videos for large mobile / small tablet */
+            .video-card .hero-video,
+            #rings-grid .hero-video,
+            #chains-grid .hero-video,
+            #bangles-grid .hero-video,
+            #earrings-grid .hero-video,
+            #anklets-grid .hero-video {
+                height: 250px;
+                object-fit: cover;
+                object-position: center;
             }
             
             .video-player {
@@ -593,6 +907,68 @@
         
         /* Universal Mobile Optimizations */
         @media (max-width: 767px) {
+            /* Mobile-only description enhancements */
+            .mobile-only-description {
+                animation: fadeInUp 0.8s ease-out;
+                margin-top: 1rem;
+                padding: 2rem 1.5rem;
+                background: rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(20px) saturate(180%);
+                border: 1px solid rgba(212, 175, 55, 0.25);
+                box-shadow: 
+                    0 12px 40px rgba(0, 0, 0, 0.08),
+                    0 4px 16px rgba(212, 175, 55, 0.1),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            
+            .mobile-only-description::before {
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.15) 0%,
+                    rgba(212, 175, 55, 0.08) 30%,
+                    rgba(255, 255, 255, 0.12) 60%,
+                    rgba(212, 175, 55, 0.05) 100%);
+                opacity: 0.8;
+            }
+            
+            .mobile-only-description p {
+                font-size: 0.95rem;
+                letter-spacing: 0.4px;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                color: #2D2D2D;
+                font-weight: 500;
+            }
+            
+            /* Enhanced video styling for mobile product cards */
+            .hero-video, .video-section {
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+                transition: all 0.3s ease;
+                object-fit: cover !important;
+                object-position: center !important;
+                background: linear-gradient(135deg, #f8f8f8, #ffffff);
+                width: 100% !important;
+                border-radius: 12px;
+            }
+            
+            .hero-video:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* Ensure all product grid videos are properly sized */
+            #rings-grid video,
+            #chains-grid video,
+            #bangles-grid video,
+            #earrings-grid video,
+            #anklets-grid video,
+            .video-card video {
+                height: 220px !important;
+                width: 100% !important;
+                object-fit: cover !important;
+                object-position: center !important;
+                border-radius: 12px !important;
+                background: #f8f8f8 !important;
+            }
+            
             #webgi-canvas {
                 transform: scale(1.0) !important;
                 left: 0 !important;
@@ -919,10 +1295,187 @@
                 font-size: 1.25rem;
             }
         }
+
+        /* CART CAROUSEL STYLES (DO NOT MODIFY EXISTING STYLES) */
+        
+        /* Cart Badge Animation */
+        .cart-badge {
+            background: linear-gradient(135deg, #D4AF37, #E8D5B0);
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+            animation: cartPulse 2s infinite ease-in-out;
+        }
+
+        @keyframes cartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Add to Cart Flying Animation */
+        @keyframes flyToCart {
+            0% {
+                transform: scale(1) translate(0, 0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.7) translate(200px, -50px);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0.3) translate(400px, -100px);
+                opacity: 0;
+            }
+        }
+
+        .cart-fly-animation {
+            animation: flyToCart 0.8s ease-in-out;
+            position: relative;
+            z-index: 1000;
+        }
+
+        /* Cart Sidebar Overlay */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 49;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Enhanced Cart Sidebar */
+        #cart-sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        #cart-sidebar.active {
+            transform: translateX(0);
+        }
+
+        /* Cart Item Styles */
+        .cart-item {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            background: rgba(248, 250, 252, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #f0f0f0;
+        }
+
+        /* Cart Counter Animation */
+        @keyframes cartBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .cart-count-bounce {
+            animation: cartBounce 0.3s ease;
+        }
+
+        /* Empty Cart Illustration */
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        .empty-cart svg {
+            margin: 0 auto 20px;
+            opacity: 0.4;
+        }
+
+        /* WhatsApp Button Enhancement */
+        .whatsapp-checkout {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-checkout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .whatsapp-checkout:hover::before {
+            left: 100%;
+        }
+
+        /* Notification Toast */
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10B981, #065F46);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-notification.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Cart */
+        @media (max-width: 768px) {
+            #cart-sidebar {
+                width: 100vw;
+            }
+            
+            .cart-notification {
+                right: 10px;
+                left: 10px;
+                transform: translateY(-100%);
+            }
+            
+            .cart-notification.show {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
-<body class="bg-warm-white font-poppins">
+<body class="bg-warm-white font-body">
     <!-- Simple Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden">
         <!-- Simple Gradient Background -->
@@ -1006,27 +1559,43 @@
         </div>
     </nav>
 
-    <!-- Shopping Cart Sidebar -->
-    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
-        <div class="p-6">
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+
+    <!-- Enhanced Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50">
+        <div class="p-6 h-full flex flex-col">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-playfair font-bold text-deep-black">Shopping Cart</h2>
-                <button onclick="toggleCart()" class="text-deep-black hover:text-luxury-gold">
+                <h2 class="text-2xl font-playfair font-bold text-deep-black">🛒 Shopping Cart</h2>
+                <button onclick="toggleCart()" class="text-deep-black hover:text-luxury-gold transition-colors p-2 hover:bg-gray-100 rounded-full">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
-            <div id="cart-items" class="space-y-4 mb-6">
+            
+            <div id="cart-items" class="flex-1 overflow-y-auto space-y-3 mb-6">
                 <!-- Cart items will be populated here -->
+                <div class="empty-cart">
+                    <svg class="w-20 h-20 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z"></path>
+                    </svg>
+                    <h3 class="text-lg font-semibold text-gray-600 mb-2">Your cart is empty</h3>
+                    <p class="text-gray-400">No items in the cart yet</p>
+                </div>
             </div>
-            <div class="border-t pt-4">
+            
+            <div class="border-t pt-4 mt-auto">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-lg font-semibold">Total: $<span id="cart-total">0.00</span></span>
+                    <span class="text-lg font-semibold">Total:</span>
+                    <span class="text-2xl font-bold text-luxury-gold">$<span id="cart-total">0.00</span></span>
                 </div>
                 <div class="space-y-3">
-                    <button onclick="checkout()" class="w-full bg-luxury-gold text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
-                        Proceed to Checkout
+                    <button onclick="whatsappCheckout()" class="whatsapp-checkout w-full text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                        </svg>
+                        WhatsApp Checkout
                     </button>
                     <button onclick="clearCart()" class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
                         Clear Cart
@@ -1052,6 +1621,13 @@
                     <p class="hero-description text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto px-4" style="font-size: 1.25rem; color: #666; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; padding: 0 1rem;">
                         Discover luxury jewelry crafted to perfection. Experience our exquisite collections in stunning 3D detail.
                     </p>
+                    
+                    <!-- Mobile-Only Descriptive Paragraph -->
+                    <div class="mobile-only-description block sm:hidden px-6 mb-8">
+                        <p class="text-base text-gray-700 text-center max-w-md mx-auto leading-relaxed" style="font-family: 'Playfair Display', serif; line-height: 1.6; color: #4A4A4A;">
+                            Each piece in our collection represents the pinnacle of artisanal craftsmanship. From rare gemstones to precious metals, our jewelry embodies timeless elegance and exclusive sophistication, meticulously designed for the discerning connoisseur.
+                        </p>
+                    </div>
                     
                     <!-- Debug Test Button -->
                     <!-- <div class="text-center mb-8">
@@ -1424,8 +2000,8 @@
             // Initialize navigation
             initializeNavigation();
             
-            // Initialize cart
-            initializeCart();
+            // Initialize cart - now handled by jewelry-ecommerce.js
+            // initializeCart();
             
             // Initialize video management
             initializeVideoManagement();
@@ -1627,26 +2203,53 @@
         }
         
         function initializeCart() {
-            let cart = [];
+            // Enhanced cart state with local storage
+            let cart = JSON.parse(localStorage.getItem('jewelryCart')) || [];
+            let isCartOpen = false;
+            
+            // Sample jewelry products for enhanced functionality
+            const enhancedProducts = [
+                { id: 1, name: "Diamond Solitaire Ring", price: 2500, image: "assets/images/diamond.svg", description: "Elegant 1ct diamond ring" },
+                { id: 2, name: "Emerald Engagement Ring", price: 1800, image: "assets/images/emerald.svg", description: "Classic emerald cut ring" },
+                { id: 3, name: "Ruby Tennis Bracelet", price: 3200, image: "assets/images/ruby.svg", description: "Stunning ruby tennis bracelet" },
+                { id: 4, name: "Sapphire Pendant", price: 1200, image: "assets/images/aqua.svg", description: "Beautiful sapphire pendant" },
+                { id: 5, name: "Gold Wedding Band", price: 800, image: "assets/images/gold_gold.png", description: "Classic gold wedding band" },
+                { id: 6, name: "Rose Gold Earrings", price: 950, image: "assets/images/rose_rose.png", description: "Elegant rose gold earrings" }
+            ];
             
             // Make cart functions globally available
             window.cart = cart;
             
+            // Enhanced toggle cart with overlay
             window.toggleCart = function() {
-                const cartSidebar = document.getElementById('cart-sidebar');
-                if (cartSidebar) {
-                    cartSidebar.classList.toggle('translate-x-full');
+                const sidebar = document.getElementById('cart-sidebar');
+                const overlay = document.getElementById('cart-overlay');
+                
+                isCartOpen = !isCartOpen;
+                
+                if (isCartOpen) {
+                    sidebar.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
             };
             
-            window.addToCart = function(category, index) {
-                // Get item from jewelryData or create a simple item
+            // Enhanced add to cart with flying animation
+            window.addToCart = function(category, index, event) {
                 let item;
+                
+                // Handle different parameter types
                 if (typeof category === 'object') {
-                    // Direct item object passed
                     item = category;
+                } else if (typeof category === 'number') {
+                    // Direct product ID from enhanced products
+                    item = enhancedProducts.find(p => p.id === category);
                 } else if (typeof category === 'string' && typeof index === 'number') {
-                    // Category and index passed
+                    // Original category and index logic
                     const jewelryData = {
                         rings: [
                             { name: "Art Deco Ring", price: 2499.99, description: "Vintage-inspired art deco design" },
@@ -1717,36 +2320,69 @@
                     console.error('Invalid parameters for addToCart');
                     return;
                 }
+
+                if (!item) return;
+
+                // Create flying animation if event is provided
+                if (event) {
+                    const flyingElement = document.createElement('div');
+                    flyingElement.innerHTML = '💎';
+                    flyingElement.className = 'flying-to-cart';
+                    
+                    const rect = event.target.getBoundingClientRect();
+                    flyingElement.style.left = rect.left + 'px';
+                    flyingElement.style.top = rect.top + 'px';
+                    
+                    document.body.appendChild(flyingElement);
+
+                    setTimeout(() => {
+                        const cartIcon = document.querySelector('.cart-icon');
+                        if (cartIcon) {
+                            const cartRect = cartIcon.getBoundingClientRect();
+                            flyingElement.style.left = cartRect.left + 'px';
+                            flyingElement.style.top = cartRect.top + 'px';
+                            flyingElement.style.transform = 'scale(0)';
+                        }
+                    }, 10);
+
+                    setTimeout(() => {
+                        if (flyingElement.parentNode) {
+                            document.body.removeChild(flyingElement);
+                        }
+                    }, 500);
+                }
                 
-                // Create cart item with unique ID
-                const cartItem = {
-                    id: Date.now() + Math.random(),
-                    name: item.name,
-                    price: item.price,
-                    description: item.description || '',
-                    category: category,
-                    quantity: 1
-                };
-                
-                // Check if item already exists in cart
+                // Add to cart logic
                 const existingItem = cart.find(cartItem => cartItem.name === item.name);
                 if (existingItem) {
                     existingItem.quantity += 1;
-                    showNotification(`Updated ${item.name} quantity in cart`, 'success');
+                    showNotification(`Updated ${item.name} quantity in cart ✨`, 'success');
                 } else {
+                    const cartItem = {
+                        id: item.id || Date.now() + Math.random(),
+                        name: item.name,
+                        price: item.price,
+                        description: item.description || '',
+                        category: category,
+                        quantity: 1,
+                        image: item.image || 'assets/images/default.png'
+                    };
                     cart.push(cartItem);
-                    showNotification(`${item.name} added to cart!`, 'success');
+                    showNotification(`${item.name} added to cart! ✨`, 'success');
                 }
                 
+                saveCart();
                 updateCartDisplay();
+                updateCartBadge();
                 
-                // Animate cart icon
-                const cartIcon = document.querySelector('#cart-count').parentElement;
-                cartIcon.classList.add('animate-bounce');
-                setTimeout(() => cartIcon.classList.remove('animate-bounce'), 1000);
-                
-                console.log('Item added to cart:', cartItem);
-                console.log('Current cart:', cart);
+                // Pulse cart icon
+                const cartIcon = document.querySelector('.cart-icon');
+                if (cartIcon) {
+                    cartIcon.style.animation = 'cartPulse 0.6s ease-in-out';
+                    setTimeout(() => {
+                        cartIcon.style.animation = '';
+                    }, 600);
+                }
             };
             
             window.buyNow = function(category, index) {
@@ -1754,13 +2390,31 @@
                 toggleCart();
                 showNotification('Item added to cart! Ready to checkout.', 'info');
             };
+
+            // Enhanced update quantity
+            window.updateQuantity = function(productId, newQuantity) {
+                if (newQuantity <= 0) {
+                    removeFromCart(productId);
+                    return;
+                }
+                
+                const item = cart.find(item => item.id === productId);
+                if (item) {
+                    item.quantity = newQuantity;
+                    saveCart();
+                    updateCartDisplay();
+                    updateCartBadge();
+                }
+            };
             
             window.removeFromCart = function(itemId) {
-                const itemIndex = cart.findIndex(item => item.id === itemId);
+                const itemIndex = cart.findIndex(item => item.id == itemId);
                 if (itemIndex > -1) {
                     const removedItem = cart[itemIndex];
                     cart.splice(itemIndex, 1);
+                    saveCart();
                     updateCartDisplay();
+                    updateCartBadge();
                     showNotification(`${removedItem.name} removed from cart`, 'info');
                 }
             };
@@ -1771,35 +2425,65 @@
                     return;
                 }
                 
-                if (confirm('Are you sure you want to clear your cart?')) {
-                    cart.length = 0;
-                    updateCartDisplay();
-                    showNotification('Cart cleared successfully', 'success');
+                cart.length = 0;
+                saveCart();
+                updateCartDisplay();
+                updateCartBadge();
+                showNotification('Cart cleared successfully', 'success');
+            };
+
+            // WhatsApp checkout function
+            window.whatsappCheckout = function() {
+                if (cart.length === 0) {
+                    showNotification('Your cart is empty!', 'warning');
+                    return;
                 }
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                let message = "🌟 *Crystal Jewels Order* 🌟\n\n";
+                message += "💎 *Selected Items:*\n";
+                
+                cart.forEach(item => {
+                    message += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+                    message += `  ${item.description}\n\n`;
+                });
+                
+                message += `💰 *Total Amount: $${total.toFixed(2)}*\n\n`;
+                message += "🚚 *Delivery Information:*\n";
+                message += "• Free delivery within 3-5 business days\n";
+                message += "• Express delivery available (24-48 hours)\n";
+                message += "• All items come with authenticity certificate\n\n";
+                message += "Please confirm your order and provide delivery address. Thank you for choosing Crystal Jewels! ✨";
+
+                const phoneNumber = "916304528287"; // +91 916304528287
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                
+                window.open(whatsappURL, '_blank');
+                
+                showNotification('Redirecting to WhatsApp... 📱', 'success');
             };
             
             window.checkout = function() {
-                if (cart.length === 0) {
-                    showNotification('Your cart is empty! Add some items first.', 'warning');
-                    return;
-                }
-                
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-                
-                // Simulate checkout process
-                showNotification('Processing your order...', 'info');
-                
-                setTimeout(() => {
-                    const orderNumber = Math.floor(Math.random() * 1000000) + 100000;
-                    showNotification(`Order #${orderNumber} placed successfully! Total: $${total.toFixed(2)} for ${itemCount} items.`, 'success');
-                    
-                    // Clear cart after successful checkout
-                    cart.length = 0;
-                    updateCartDisplay();
-                    toggleCart();
-                }, 2000);
+                whatsappCheckout();
             };
+
+            // Save cart to localStorage
+            function saveCart() {
+                localStorage.setItem('jewelryCart', JSON.stringify(cart));
+            }
+
+            // Update cart badge
+            function updateCartBadge() {
+                const badge = document.getElementById('cart-count');
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                
+                if (badge) {
+                    badge.textContent = totalItems;
+                    badge.style.display = totalItems > 0 ? 'flex' : 'none';
+                }
+            }
             
             function updateCartDisplay() {
                 const cartCount = document.getElementById('cart-count');
@@ -1814,35 +2498,40 @@
                 // Update cart count
                 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
                 cartCount.textContent = totalItems;
-                cartCount.style.display = totalItems > 0 ? 'block' : 'none';
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
                 
                 // Update cart total
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 cartTotal.textContent = total.toFixed(2);
                 
-                // Update cart items display
+                // Enhanced cart items display
                 if (cart.length === 0) {
                     cartItems.innerHTML = `
-                        <div class="text-center py-8">
-                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z"></path>
+                        <div class="empty-cart">
+                            <svg class="w-20 h-20 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z"></path>
                             </svg>
-                            <p class="text-gray-500 text-lg">Your cart is empty</p>
-                            <p class="text-gray-400 text-sm mt-2">Add some beautiful jewelry to get started!</p>
+                            <h3 class="text-lg font-semibold text-gray-600 mb-2">Your cart is empty</h3>
+                            <p class="text-gray-400">No items in the cart yet</p>
                         </div>
                     `;
                 } else {
                     cartItems.innerHTML = cart.map(item => `
-                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border hover:shadow-md transition-shadow">
+                        <div class="cart-item" data-id="${item.id}">
+                            <img src="${item.image || 'assets/images/default.png'}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
                             <div class="flex-1">
-                                <h4 class="font-semibold text-sm text-deep-black">${item.name}</h4>
-                                <p class="text-gray-600 text-xs mt-1">${item.description}</p>
+                                <h4 class="font-semibold text-deep-black">${item.name}</h4>
+                                <p class="text-sm text-gray-500">${item.description}</p>
                                 <div class="flex items-center justify-between mt-2">
-                                    <span class="text-luxury-gold font-bold">$${item.price.toFixed(2)}</span>
-                                    <span class="text-gray-500 text-xs">Qty: ${item.quantity}</span>
+                                    <span class="text-luxury-gold font-bold">$${item.price}</span>
+                                    <div class="quantity-controls">
+                                        <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})" class="quantity-btn">-</button>
+                                        <span class="quantity">${item.quantity}</span>
+                                        <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})" class="quantity-btn">+</button>
+                                    </div>
                                 </div>
                             </div>
-                            <button onclick="removeFromCart('${item.id}')" class="ml-3 text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-full transition-colors">
+                            <button onclick="removeFromCart(${item.id})" class="remove-btn">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
@@ -1851,9 +2540,78 @@
                     `).join('');
                 }
             }
+
+            // Show enhanced notification
+            window.showNotification = function(message, type = 'info') {
+                // Remove existing notifications
+                const existingNotifications = document.querySelectorAll('.notification-toast');
+                existingNotifications.forEach(notification => notification.remove());
+                
+                const notification = document.createElement('div');
+                notification.className = 'notification-toast';
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                // Hide and remove notification
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            };
+
+            // Quick add function for demo
+            window.quickAddToCart = function(productId, event) {
+                addToCart(productId, null, event);
+            };
             
             // Initialize cart display
             updateCartDisplay();
+            updateCartBadge();
+
+            // Create demo buttons for testing
+            setTimeout(() => {
+                const quickAddContainer = document.createElement('div');
+                quickAddContainer.className = 'quick-add-demo';
+                quickAddContainer.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    left: 20px;
+                    background: white;
+                    padding: 15px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                    z-index: 1000;
+                    max-width: 300px;
+                `;
+                
+                quickAddContainer.innerHTML = `
+                    <h4 style="margin: 0 0 10px 0; font-weight: bold;">Quick Add Demo:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                        ${enhancedProducts.slice(0, 6).map(product => `
+                            <button onclick="quickAddToCart(${product.id}, event)" 
+                                    style="padding: 8px; background: #D4AF37; color: white; border: none; border-radius: 5px; font-size: 12px; cursor: pointer;">
+                                Add ${product.name.split(' ')[0]}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <button onclick="this.parentElement.remove()" 
+                            style="margin-top: 10px; padding: 5px 10px; background: #ccc; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
+                        Hide Demo
+                    </button>
+                `;
+                
+                document.body.appendChild(quickAddContainer);
+            }, 2000);
         }
     </script>
     <script src="src/jewelry-website.ts"></script>
