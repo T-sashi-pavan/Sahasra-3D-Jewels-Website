@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahasra Jewelers - Luxury 3D Jewelry Collection</title>
+    
+    <!-- Local Assets - Network Independent -->
+    <link rel="stylesheet" href="assets/css/tailwind-local.css">
+    <link rel="stylesheet" href="assets/fonts/fonts-local.css">
+    
+    <!-- Preload Critical Local Assets -->
+    <link rel="preload" href="assets/ring_webgi.glb" as="fetch" crossorigin>
+    <link rel="preload" href="assets/js/network-independence.js" as="script">
+    
+    <!-- Fallback Configuration -->
+    <script>
+        // Configure Tailwind-like functionality locally
+        window.tailwindConfig = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury-gold': '#D4AF37',
+                        'soft-pink': '#F8E8E9',
+                        'pastel-pink': '#E6BFBE',
+                        'deep-black': '#1a1a1a',
+                        'warm-white': '#FAFAFA'
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'Times New Roman', 'serif'],
+                        'poppins': ['Poppins', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Inline Critical CSS for instant rendering -->
+    <style>
+        /* Critical CSS - Inline for faster First Paint */
+        body { 
+            margin: 0; 
+            padding: 0;
+            font-family: 'Poppins', sans-serif; 
+            background: #FAFAFA;
+            font-display: swap;
+            overflow-x: hidden;
+        }
+        
+        html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .page-section { 
+            display: none !important; 
+        }
+        .page-section.active { 
+            display: block !important; 
+        }
+        
+        /* Basic layout fallbacks */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid #D4AF37;
+            z-index: 50;
+            backdrop-filter: blur(4px);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #F8E8E9, #FAFAFA, #E6BFBE);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #webgi-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Cart sidebar styles */
+        #cart-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 24rem;
+            background: white;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 50;
+        }
+        
+        #cart-sidebar.translate-x-0 {
+            transform: translateX(0);
+        }
+        
+        #cart-sidebar.translate-x-full {
+            transform: translateX(100%);
+        }
+    </style>
+    
+    <!-- Network Independence Script - Load First -->
+    <script src="assets/js/network-independence.js" defer></script>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Discover exquisite 3D jewelry collections at Sahasra Jewelers. Luxury rings, chains, bangles, earrings, and anklets crafted with precision.">
+    <meta property="og:title" content="Sahasra Jewelers - Luxury 3D Jewelry Collection">
+    <meta property="og:description" content="Explore our stunning collection of luxury jewelry in immersive 3D.">
+    <meta property="og:image" content="assets/images/imageSocial.jpg">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    
+    <style>
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        
+        /* CSS Fallbacks for better reliability */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #F8E8E9, #FAFAFA, #E6BFBE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            padding: 2rem;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .luxury-gold-text {
+            color: #D4AF37;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .video-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+        .cart-badge {
+            background: linear-gradient(135deg, #D4AF37, #F4D03F);
+            animation: pulse 2s infinite;
+            min-width: 1.25rem;
+            height: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+            40%, 43% { transform: translateY(-10px); }
+            70% { transform: translateY(-5px); }
+            90% { transform: translateY(-2px); }
+        }
+        
+        .animate-bounce {
+            animation: bounce 1s ease-in-out;
+        }
+        
+        .cart-item-enter {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .cart-item-enter-active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .notification-slide-in {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification-slide-in.show {
+            transform: translateX(0);
+        }
+        .video-player {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .hero-video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+        
+        .hero-video:hover {
+            opacity: 0.9;
+        }
+        
+        .hero-video.paused {
+            opacity: 0.7;
+        }
+        
+        .video-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .video-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(212, 175, 55, 0.9);
+            color: white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .video-container:hover .video-play-overlay,
+        .video-container .video-play-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        
+        #webgi-canvas {
+            pointer-events: auto;
+            opacity: 0.7;
+            transform: scale(1.0);
+            transform-origin: center;
+        }
+        
+        /* Performance optimizations */
+        * {
+            box-sizing: border-box;
+        }
+        
+        video {
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        .video-section {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Enhanced Responsive Design System */
+        
+        /* Extra Small Mobile Devices (320px - 374px) */
+        @media (max-width: 374px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.1;
+                margin-bottom: 1rem !important;
+            }
+            
+            .hero-description {
+                font-size: 1rem !important;
+                margin-bottom: 1.5rem !important;
+                padding: 0 0.5rem !important;
+            }
+            
+            .hero-video {
+                height: 180px;
+                border-radius: 15px;
+            }
+            
+            .video-player {
+                height: 120px;
+            }
+            
+            .nav-container {
+                padding: 0 0.5rem;
+            }
+            
+            .category-card .bg-gradient-to-br {
+                padding: 1rem !important;
+            }
+            
+            .category-card h3 {
+                font-size: 1rem !important;
+            }
+            
+            .category-card p {
+                font-size: 0.75rem !important;
+            }
+            
+            .bg-gradient-to-br .w-16 {
+                width: 3rem !important;
+                height: 3rem !important;
+            }
+        }
+        
+        /* Small Mobile Devices (375px - 479px) */
+        @media (min-width: 375px) and (max-width: 479px) {
+            .hero-title {
+                font-size: 3rem !important;
+                line-height: 1.1;
+                margin-bottom: 1.25rem !important;
+            }
+            
+            .hero-description {
+                font-size: 1.125rem !important;
+                margin-bottom: 2rem !important;
+                padding: 0 0.75rem !important;
+            }
+            
+            .hero-video {
+                height: 220px;
+                border-radius: 18px;
+            }
+            
+            .video-player {
+                height: 140px;
+            }
+            
+            .category-card .bg-gradient-to-br {
+                padding: 1.5rem !important;
+            }
+        }
+        
+        /* Medium Mobile Devices (480px - 639px) */
+        @media (min-width: 480px) and (max-width: 639px) {
+            .hero-title {
+                font-size: 3.5rem !important;
+                line-height: 1.1;
+            }
+            
+            .hero-description {
+                font-size: 1.125rem !important;
+                margin-bottom: 2.5rem !important;
+            }
+            
+            .hero-video {
+                height: 280px;
+            }
+            
+            .video-player {
+                height: 160px;
+            }
+            
+            .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-5 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
+            }
+        }
+        
+        /* Large Mobile / Small Tablet (640px - 767px) */
+        @media (min-width: 640px) and (max-width: 767px) {
+            .hero-title {
+                font-size: 4rem !important;
+            }
+            
+            .hero-video {
+                height: 320px;
+            }
+            
+            .video-player {
+                height: 200px;
+            }
+            
+            .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-5 {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+            
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+        }
+        
+        /* Tablets (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .hero-title {
+                font-size: 5rem !important;
+            }
+            
+            .hero-description {
+                font-size: 1.375rem !important;
+            }
+            
+            .hero-video {
+                height: 380px;
+            }
+            
+            .video-player {
+                height: 240px;
+            }
+            
+            .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-5 {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 2rem !important;
+            }
+            
+            .nav-container {
+                max-width: 100%;
+                padding: 0 2rem;
+            }
+            
+            /* Adjust navigation spacing for tablets */
+            .hidden.md\\:flex .max-w-2xl {
+                max-width: none !important;
+            }
+            
+            .hidden.md\\:flex .space-x-6 > * {
+                margin-left: 1rem !important;
+                margin-right: 1rem !important;
+            }
+        }
+        
+        /* Small Laptops (1024px - 1279px) */
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            .hero-title {
+                font-size: 6rem !important;
+            }
+            
+            .hero-video {
+                height: 420px;
+            }
+            
+            .video-player {
+                height: 280px;
+            }
+            
+            .nav-container {
+                max-width: 1024px;
+                padding: 0 2rem;
+            }
+            
+            .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-5 {
+                grid-template-columns: repeat(5, 1fr) !important;
+                gap: 2rem !important;
+            }
+        }
+        
+        /* Large Laptops (1280px - 1535px) */
+        @media (min-width: 1280px) and (max-width: 1535px) {
+            .hero-title {
+                font-size: 7rem !important;
+            }
+            
+            .hero-video {
+                height: 480px;
+            }
+            
+            .video-player {
+                height: 320px;
+            }
+            
+            .nav-container {
+                max-width: 1280px;
+            }
+        }
+        
+        /* Extra Large Screens / 4K (1536px+) */
+        @media (min-width: 1536px) {
+            .hero-title {
+                font-size: 8rem !important;
+            }
+            
+            .hero-description {
+                font-size: 1.5rem !important;
+            }
+            
+            .hero-video {
+                height: 560px;
+            }
+            
+            .video-player {
+                height: 380px;
+            }
+            
+            .nav-container {
+                max-width: 1536px;
+            }
+            
+            .category-card .bg-gradient-to-br {
+                padding: 3rem !important;
+            }
+            
+            .category-card h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            .category-card p {
+                font-size: 1.125rem !important;
+            }
+        }
+        
+        /* Universal Mobile Optimizations */
+        @media (max-width: 767px) {
+            #webgi-canvas {
+                transform: scale(1.0) !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+            }
+            
+            /* Ensure full width hero section on mobile */
+            #home-page section {
+                margin: 0;
+                padding-left: 0;
+                padding-right: 0;
+                width: 100vw;
+                position: relative;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;
+            }
+            
+            /* Fix content overlay for mobile */
+            .hero-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Mobile navigation improvements */
+            .hidden.md\\:flex {
+                display: none !important;
+            }
+            
+            /* Mobile cart sidebar adjustments */
+            #cart-sidebar {
+                width: 100vw !important;
+                max-width: 400px;
+            }
+            
+            /* Mobile section spacing */
+            .py-20 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+            
+            .py-16 {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
+            
+            /* Mobile text adjustments */
+            .text-4xl {
+                font-size: 2rem !important;
+            }
+            
+            .text-3xl {
+                font-size: 1.75rem !important;
+            }
+            
+            .text-2xl {
+                font-size: 1.5rem !important;
+            }
+            
+            .text-5xl {
+                font-size: 2.5rem !important;
+            }
+        }
+        
+        /* Landscape Mobile Devices */
+        @media (max-width: 767px) and (orientation: landscape) {
+            .hero-section {
+                min-height: 100vh;
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .hero-description {
+                font-size: 1rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .hero-video {
+                height: 200px !important;
+            }
+            
+            .video-player {
+                height: 140px !important;
+            }
+        }
+        
+        /* High DPI / Retina Display Adjustments */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hero-video,
+            .video-player {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+            
+            .category-card .bg-gradient-to-br {
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .fixed,
+            #cart-sidebar,
+            video,
+            button {
+                display: none !important;
+            }
+            
+            .hero-section {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .page-section:not(.active) {
+                display: block !important;
+            }
+        }
+        
+        /* Reduced Motion Preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .category-card:hover {
+                animation: none !important;
+            }
+        }
+        
+        /* Category Cards Enhancement */
+        .category-card {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(248, 232, 233, 0.2));
+            border-radius: 1.5rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .category-card:hover::before {
+            opacity: 1;
+        }
+        
+        .category-card .bg-gradient-to-br {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .category-card:hover {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Enhanced gradient backgrounds */
+        .category-card .bg-gradient-to-br {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 232, 233, 0.4) 25%, 
+                rgba(212, 175, 55, 0.1) 100%);
+        }
+
+        /* SIMPLE LOADING SCREEN STYLES */
+        #loading-screen {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #F8E8E9 0%, #FAFAFA 50%, #E6BFBE 100%);
+            z-index: 9999; /* Higher than navigation */
+        }
+
+        /* Hide all content when loading screen is active */
+        #loading-screen:not(.loading-screen-hide) ~ * {
+            display: none !important;
+        }
+
+        /* Hide navigation specifically during loading */
+        body:has(#loading-screen:not(.loading-screen-hide)) nav,
+        body:has(#loading-screen:not(.loading-screen-hide)) #cart-sidebar {
+            display: none !important;
+        }
+
+        .simple-gradient {
+            background: linear-gradient(135deg, #F8E8E9 0%, #FAFAFA 50%, #E6BFBE 100%);
+        }
+
+        /* Welcome Text */
+        .welcome-text {
+            font-family: 'Poppins', sans-serif;
+            opacity: 0;
+            animation: fadeInText 1s ease-in-out 0.5s forwards;
+            color: #1a1a1a;
+        }
+
+        /* Simple Letters */
+        .simple-letter {
+            display: inline-block;
+            font-size: 3rem;
+            font-weight: 600;
+            color: #D4AF37;
+            font-family: 'Playfair Display', serif;
+            animation: simpleFloat 2.5s ease-in-out infinite;
+            transform-origin: center bottom;
+            opacity: 0;
+            animation-fill-mode: forwards;
+            text-shadow: 0 2px 4px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Jewels Text */
+        .jewels-text {
+            font-family: 'Poppins', sans-serif;
+            opacity: 0;
+            animation: fadeInText 1s ease-in-out 1.5s forwards;
+            color: #666;
+        }
+
+        @keyframes simpleFloat {
+            0% { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+            50% { 
+                transform: translateY(-8px);
+            }
+            100% { 
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes fadeInText {
+            0% { 
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Screen Hide Animation */
+        .loading-screen-hide {
+            opacity: 0;
+            transform: scale(1.05);
+            transition: all 0.8s ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Responsive Design for Loading Screen */
+        @media (max-width: 768px) {
+            .simple-letter {
+                font-size: 2.5rem;
+            }
+            
+            .welcome-text {
+                font-size: 1.125rem;
+            }
+            
+            .jewels-text {
+                font-size: 1rem;
+            }
+            
+            #loading-screen .space-x-2 {
+                gap: 0.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .simple-letter {
+                font-size: 2rem;
+            }
+            
+            .welcome-text {
+                font-size: 1rem;
+            }
+            
+            .jewels-text {
+                font-size: 0.875rem;
+            }
+            
+            #loading-screen .space-x-2 {
+                gap: 0.25rem;
+            }
+        }
+
+        /* High-end devices enhancement */
+        @media (min-width: 1200px) {
+            .simple-letter {
+                font-size: 4rem;
+            }
+            
+            .welcome-text {
+                font-size: 1.5rem;
+            }
+            
+            .jewels-text {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-warm-white font-poppins">
+    <!-- Simple Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden">
+        <!-- Simple Gradient Background -->
+        <div class="absolute inset-0 simple-gradient"></div>
+        
+        <!-- Welcome Text -->
+        <div class="relative z-10 text-center mb-8">
+            <h2 class="welcome-text text-xl md:text-2xl font-light tracking-wider">Welcome to</h2>
+        </div>
+        
+        <!-- Floating Sahasra Letters -->
+        <div class="relative z-10 flex items-center justify-center space-x-2 md:space-x-4 lg:space-x-6">
+            <span class="simple-letter" style="animation-delay: 0s;">S</span>
+            <span class="simple-letter" style="animation-delay: 0.2s;">a</span>
+            <span class="simple-letter" style="animation-delay: 0.4s;">h</span>
+            <span class="simple-letter" style="animation-delay: 0.6s;">a</span>
+            <span class="simple-letter" style="animation-delay: 0.8s;">s</span>
+            <span class="simple-letter" style="animation-delay: 1.0s;">r</span>
+            <span class="simple-letter" style="animation-delay: 1.2s;">a</span>
+        </div>
+        
+        <!-- Jewels Text -->
+        <div class="relative z-10 text-center mt-2">
+            <h3 class="jewels-text text-lg md:text-xl font-light tracking-widest">Jewels</h3>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-luxury-gold/20 z-50">
+        <div class="nav-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 w-full">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer flex-shrink-0" onclick="showPage('home')">
+                    <span class="text-2xl font-playfair font-bold text-deep-black">Sahasra</span>
+                    <span class="text-2xl font-playfair font-bold text-luxury-gold ml-1">Jewels</span>
+                </div>
+
+                <!-- Desktop Navigation - Centered and Expanded -->
+                <div class="hidden md:flex flex-1 justify-center mx-8">
+                    <div class="flex items-center justify-evenly w-full max-w-2xl space-x-6">
+                        <a onclick="showPage('home')" class="nav-link text-deep-black hover:text-luxury-gold transition-colors cursor-pointer font-medium">Home</a>
+                        <a onclick="showPage('rings')" class="nav-link text-deep-black hover:text-luxury-gold transition-colors cursor-pointer font-medium">Rings</a>
+                        <a onclick="showPage('chains')" class="nav-link text-deep-black hover:text-luxury-gold transition-colors cursor-pointer font-medium">Chains</a>
+                        <a onclick="showPage('bangles')" class="nav-link text-deep-black hover:text-luxury-gold transition-colors cursor-pointer font-medium">Bangles</a>
+                        <a onclick="showPage('earrings')" class="nav-link text-deep-black hover:text-luxury-gold transition-colors cursor-pointer font-medium">Earrings</a>
+                        <a onclick="showPage('anklets')" class="nav-link text-deep-black hover:text-luxury-gold transition-colors cursor-pointer font-medium">Anklets</a>
+                    </div>
+                </div>
+
+                <!-- Cart -->
+                <div class="flex items-center space-x-4 flex-shrink-0">
+                    <button onclick="toggleCart()" class="relative p-2 text-deep-black hover:text-luxury-gold transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m-2.4 0L3 3m0 0h2m5 13a1 1 0 11-2 0 1 1 0 012 0zm10 0a1 1 0 11-2 0 1 1 0 012 0"></path>
+                        </svg>
+                        <span id="cart-count" class="cart-badge absolute -top-2 -right-2 text-xs text-white px-2 py-1 rounded-full">0</span>
+                    </button>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button onclick="toggleMobileMenu()" class="text-deep-black hover:text-luxury-gold">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-luxury-gold/20">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a onclick="showPage('home')" class="block px-3 py-2 text-deep-black hover:text-luxury-gold cursor-pointer">Home</a>
+                <a onclick="showPage('rings')" class="block px-3 py-2 text-deep-black hover:text-luxury-gold cursor-pointer">Rings</a>
+                <a onclick="showPage('chains')" class="block px-3 py-2 text-deep-black hover:text-luxury-gold cursor-pointer">Chains</a>
+                <a onclick="showPage('bangles')" class="block px-3 py-2 text-deep-black hover:text-luxury-gold cursor-pointer">Bangles</a>
+                <a onclick="showPage('earrings')" class="block px-3 py-2 text-deep-black hover:text-luxury-gold cursor-pointer">Earrings</a>
+                <a onclick="showPage('anklets')" class="block px-3 py-2 text-deep-black hover:text-luxury-gold cursor-pointer">Anklets</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-playfair font-bold text-deep-black">Shopping Cart</h2>
+                <button onclick="toggleCart()" class="text-deep-black hover:text-luxury-gold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="cart-items" class="space-y-4 mb-6">
+                <!-- Cart items will be populated here -->
+            </div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-semibold">Total: $<span id="cart-total">0.00</span></span>
+                </div>
+                <div class="space-y-3">
+                    <button onclick="checkout()" class="w-full bg-luxury-gold text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                        Proceed to Checkout
+                    </button>
+                    <button onclick="clearCart()" class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                        Clear Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <section id="home-page" class="page-section active pt-16" style="display: block;">
+        <!-- Hero Section with 3D Ring -->
+        <section class="hero-section min-h-screen flex items-center justify-center bg-gradient-to-br from-soft-pink via-warm-white to-pastel-pink relative overflow-hidden" style="min-height: 100vh; background: linear-gradient(135deg, #F8E8E9, #FAFAFA, #E6BFBE); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+            <!-- 3D Canvas Background -->
+            <canvas id="webgi-canvas" class="absolute inset-0 w-full h-full" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+            
+            <!-- Content Overlay -->
+            <div class="relative z-10 w-full px-0 py-20 hero-content" style="position: relative; z-index: 10; width: 100%; padding: 5rem 0; text-align: center;">
+                <div class="text-center">
+                    <h1 class="hero-title text-4xl sm:text-6xl md:text-8xl font-playfair font-bold text-deep-black mb-6" style="font-size: 4rem; font-weight: bold; color: #1a1a1a; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+                        Sahasra <span class="text-luxury-gold" style="color: #D4AF37;">Jewels</span>
+                    </h1>
+                    <p class="hero-description text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto px-4" style="font-size: 1.25rem; color: #666; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; padding: 0 1rem;">
+                        Discover luxury jewelry crafted to perfection. Experience our exquisite collections in stunning 3D detail.
+                    </p>
+                    
+                    <!-- Debug Test Button -->
+                    <!-- <div class="text-center mb-8">
+                        <button onclick="testGrids()" class="bg-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                            Test Load Video Cards
+                        </button>
+                    </div> -->
+                    
+                    <!-- Category Showcase -->
+                    <div class="mt-16 sm:mt-20">
+                        <!-- Section Header -->
+                        <div class="text-center mb-8 sm:mb-12">
+                            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-deep-black mb-2 sm:mb-4">Discover Our Collections</h2>
+                            <p class="text-sm sm:text-base lg:text-lg text-gray-600 max-w-xl lg:max-w-2xl mx-auto px-2">Explore our exquisite range of handcrafted jewelry, each piece telling its own story of elegance and luxury.</p>
+                        </div>
+                        
+                        
+                    </div>
+            </div>
+        </section>
+
+        <!-- Jewelry Categories with Videos -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Explore Our Collections</h2>
+                
+                <!-- Rings Section -->
+                <div class="mb-20">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-playfair font-bold text-deep-black mb-4">Exquisite Rings</h3>
+                        <p class="text-gray-600 text-lg">Discover our stunning collection of luxury rings</p>
+                    </div>
+                    <div class="flex justify-center mb-8">
+                        <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                            <source src="assets/images/3D JEWELLERY VIDEOS/RINGS/ALLRINGSHOMEPAGE.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="showPage('rings')" class="bg-luxury-gold text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Explore Rings Collection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chains Section -->
+                <div class="mb-20">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-playfair font-bold text-deep-black mb-4">Elegant Chains</h3>
+                        <p class="text-gray-600 text-lg">Luxurious chains and necklaces for every style</p>
+                    </div>
+                    <div class="flex justify-center mb-8">
+                        <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                            <source src="assets/images/3D JEWELLERY VIDEOS/CHAINS/GOLDENCHAINHOMEPAGE.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="showPage('chains')" class="bg-luxury-gold text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Explore Chains Collection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bangles Section -->
+                <div class="mb-20">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-playfair font-bold text-deep-black mb-4">Beautiful Bangles</h3>
+                        <p class="text-gray-600 text-lg">Traditional and modern bangles crafted to perfection</p>
+                    </div>
+                    <div class="flex justify-center mb-8">
+                        <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                            <source src="assets/images/3D JEWELLERY VIDEOS/BANGLES/traditionalantique-stylegoldbangles3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="showPage('bangles')" class="bg-luxury-gold text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Explore Bangles Collection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Earrings Section -->
+                <div class="mb-20">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-playfair font-bold text-deep-black mb-4">Stunning Earrings</h3>
+                        <p class="text-gray-600 text-lg">Elegant earrings for every occasion</p>
+                    </div>
+                    <div class="flex justify-center mb-8">
+                        <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                            <source src="assets/images/3D JEWELLERY VIDEOS/EARRINGS/DIAMONDEARRINGS4.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="showPage('earrings')" class="bg-luxury-gold text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Explore Earrings Collection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Anklets Section -->
+                <div class="mb-20">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-playfair font-bold text-deep-black mb-4">Graceful Anklets</h3>
+                        <p class="text-gray-600 text-lg">Delicate anklets to complement your style</p>
+                    </div>
+                    <div class="flex justify-center mb-8">
+                        <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                            <source src="assets/images/3D JEWELLERY VIDEOS/ANKLETS/AnkletA2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="showPage('anklets')" class="bg-luxury-gold text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Explore Anklets Collection
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Collections -->
+        <section class="py-20 bg-soft-pink">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Featured Collections</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-luxury-gold/20 rounded-2xl p-8 mb-6">
+                            <h3 class="text-2xl font-playfair font-bold text-deep-black mb-4">Diamond Collection</h3>
+                            <p class="text-gray-600">Exquisite diamonds set in precious metals</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-luxury-gold/30 rounded-2xl p-8 mb-6">
+                            <h3 class="text-2xl font-playfair font-bold text-deep-black mb-4">Gold Collection</h3>
+                            <p class="text-gray-600">Timeless gold jewelry for every occasion</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-pastel-pink rounded-2xl p-8 mb-6">
+                            <h3 class="text-2xl font-playfair font-bold text-deep-black mb-4">Designer Collection</h3>
+                            <p class="text-gray-600">Unique pieces crafted by master artisans</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- RINGS PAGE -->
+    <section id="rings-page" class="page-section pt-16">
+        <!-- Hero Video Section -->
+        <section class="py-20 bg-gradient-to-br from-soft-pink via-warm-white to-pastel-pink">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-playfair font-bold text-deep-black mb-8">Exquisite Ring Collection</h1>
+                <p class="text-xl text-gray-600 mb-12">Discover our stunning collection of luxury rings</p>
+                <div class="flex justify-center">
+                    <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                        <source src="assets/images/3D JEWELLERY VIDEOS/RINGS/ALLRINGSHOMEPAGE.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rings Collection -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Our Ring Collection</h2>
+                <div id="rings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Ring cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- CHAINS PAGE -->
+    <section id="chains-page" class="page-section pt-16">
+        <!-- Hero Video Section -->
+        <section class="py-20 bg-gradient-to-br from-soft-pink via-warm-white to-pastel-pink">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-playfair font-bold text-deep-black mb-8">Elegant Chain Collection</h1>
+                <p class="text-xl text-gray-600 mb-12">Luxurious chains and necklaces for every style</p>
+                <div class="flex justify-center">
+                    <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                        <source src="assets/images/3D JEWELLERY VIDEOS/CHAINS/GOLDENCHAINHOMEPAGE.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chains Collection -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Our Chain Collection</h2>
+                <div id="chains-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Chain cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- BANGLES PAGE -->
+    <section id="bangles-page" class="page-section pt-16">
+        <!-- Hero Video Section -->
+        <section class="py-20 bg-gradient-to-br from-soft-pink via-warm-white to-pastel-pink">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-playfair font-bold text-deep-black mb-8">Beautiful Bangle Collection</h1>
+                <p class="text-xl text-gray-600 mb-12">Traditional and modern bangles crafted to perfection</p>
+                <div class="flex justify-center">
+                    <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                        <source src="assets/images/3D JEWELLERY VIDEOS/BANGLES/traditionalantique-stylegoldbangles3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bangles Collection -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Our Bangle Collection</h2>
+                <div id="bangles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Bangle cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- EARRINGS PAGE -->
+    <section id="earrings-page" class="page-section pt-16">
+        <!-- Hero Video Section -->
+        <section class="py-20 bg-gradient-to-br from-soft-pink via-warm-white to-pastel-pink">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-playfair font-bold text-deep-black mb-8">Stunning Earring Collection</h1>
+                <p class="text-xl text-gray-600 mb-12">Elegant earrings for every occasion</p>
+                <div class="flex justify-center">
+                    <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                        <source src="assets/images/3D JEWELLERY VIDEOS/EARRINGS/DIAMONDEARRINGS4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Earrings Collection -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Our Earring Collection</h2>
+                <div id="earrings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Earring cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- ANKLETS PAGE -->
+    <section id="anklets-page" class="page-section pt-16">
+        <!-- Hero Video Section -->
+        <section class="py-20 bg-gradient-to-br from-soft-pink via-warm-white to-pastel-pink">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-playfair font-bold text-deep-black mb-8">Graceful Anklet Collection</h1>
+                <p class="text-xl text-gray-600 mb-12">Delicate anklets to complement your style</p>
+                <div class="flex justify-center">
+                    <video class="hero-video shadow-2xl video-section" autoplay muted loop preload="metadata" playsinline>
+                        <source src="assets/images/3D JEWELLERY VIDEOS/ANKLETS/AnkletA2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anklets Collection -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-playfair font-bold text-center text-deep-black mb-16">Our Anklet Collection</h2>
+                <div id="anklets-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Anklet cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-playfair font-bold mb-4">Sahasra Jewelers</h3>
+                    <p class="text-gray-300">Luxury jewelry crafted to perfection for discerning customers worldwide.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a onclick="showPage('home')" class="text-gray-300 hover:text-luxury-gold cursor-pointer">Home</a></li>
+                        <li><a onclick="showPage('rings')" class="text-gray-300 hover:text-luxury-gold cursor-pointer">Rings</a></li>
+                        <li><a onclick="showPage('chains')" class="text-gray-300 hover:text-luxury-gold cursor-pointer">Chains</a></li>
+                        <li><a onclick="showPage('bangles')" class="text-gray-300 hover:text-luxury-gold cursor-pointer">Bangles</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-luxury-gold">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-luxury-gold">Shipping Info</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-luxury-gold">Returns</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-luxury-gold">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-luxury-gold">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-luxury-gold">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-luxury-gold">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.222.083.343-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z."/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2025 Sahasra Jewelers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize the website immediately when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Website initializing...');
+            
+            // Show loading screen first
+            showLoadingScreen();
+            
+            // Hide loading screen after 4 seconds and show main content
+            setTimeout(() => {
+                hideLoadingScreen();
+                
+                // Ensure home page is visible after loading
+                const homePage = document.getElementById('home-page');
+                if (homePage) {
+                    homePage.classList.add('active');
+                    console.log('Home page activated');
+                    
+                    // Start home page videos
+                    setTimeout(() => {
+                        playVideosInElement(homePage);
+                    }, 500);
+                }
+            }, 4000); // Show loading for 4 seconds
+            
+            // Initialize navigation
+            initializeNavigation();
+            
+            // Initialize cart
+            initializeCart();
+            
+            // Initialize video management
+            initializeVideoManagement();
+            
+            // Initialize notification system
+            initializeNotifications();
+            
+            console.log('Website initialized successfully');
+        });
+        
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'flex';
+                loadingScreen.classList.remove('loading-screen-hide');
+                
+                console.log('Simple loading screen displayed');
+                
+                // Hide loading screen after 3 seconds
+                setTimeout(() => {
+                    hideLoadingScreen();
+                }, 3000);
+            }
+        }
+        
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('loading-screen-hide');
+                
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    console.log('Loading screen hidden');
+                }, 800);
+            }
+        }
+        
+        function initializeNotifications() {
+            // Create notification container if it doesn't exist
+            if (!document.getElementById('notification-container')) {
+                const container = document.createElement('div');
+                container.id = 'notification-container';
+                container.className = 'fixed top-20 right-4 z-50 space-y-2';
+                document.body.appendChild(container);
+            }
+            
+            window.showNotification = function(message, type = 'info', duration = 4000) {
+                const container = document.getElementById('notification-container');
+                const notification = document.createElement('div');
+                
+                const colors = {
+                    success: 'bg-green-500 border-green-400',
+                    error: 'bg-red-500 border-red-400',
+                    warning: 'bg-yellow-500 border-yellow-400',
+                    info: 'bg-blue-500 border-blue-400'
+                };
+                
+                const icons = {
+                    success: '✓',
+                    error: '✗',
+                    warning: '⚠',
+                    info: 'ℹ'
+                };
+                
+                notification.className = `${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg border-l-4 transform translate-x-full transition-transform duration-300 max-w-sm`;
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="text-lg mr-3">${icons[type]}</span>
+                        <span class="flex-1">${message}</span>
+                        <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-white hover:text-gray-200">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(notification);
+                
+                // Animate in
+                setTimeout(() => {
+                    notification.classList.remove('translate-x-full');
+                }, 100);
+                
+                // Auto remove
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        if (notification.parentElement) {
+                            notification.remove();
+                        }
+                    }, 300);
+                }, duration);
+            };
+        }
+        
+        function initializeVideoManagement() {
+            // Function to play all videos in an element
+            window.playVideosInElement = function(element) {
+                const videos = element.querySelectorAll('video');
+                videos.forEach(video => {
+                    video.currentTime = 0; // Reset to beginning
+                    video.play().catch(e => {
+                        console.log('Autoplay prevented for video:', video.src, e);
+                        
+                        // Add video container and play overlay if not exists
+                        if (!video.parentElement.classList.contains('video-container')) {
+                            const container = document.createElement('div');
+                            container.className = 'video-container';
+                            video.parentNode.insertBefore(container, video);
+                            container.appendChild(video);
+                            
+                            const overlay = document.createElement('div');
+                            overlay.className = 'video-play-overlay show';
+                            overlay.innerHTML = '▶';
+                            container.appendChild(overlay);
+                            
+                            // Add click handlers
+                            const playVideo = () => {
+                                video.play().then(() => {
+                                    overlay.classList.remove('show');
+                                }).catch(() => {
+                                    console.log('Play failed even after user interaction');
+                                });
+                            };
+                            
+                            video.addEventListener('click', playVideo);
+                            overlay.addEventListener('click', playVideo);
+                            
+                            video.addEventListener('pause', () => {
+                                overlay.classList.add('show');
+                            });
+                            
+                            video.addEventListener('play', () => {
+                                overlay.classList.remove('show');
+                            });
+                        }
+                        
+                        // Add click to play functionality if not already added
+                        if (!video.hasAttribute('data-click-added')) {
+                            video.setAttribute('data-click-added', 'true');
+                            video.style.cursor = 'pointer';
+                        }
+                    });
+                });
+            };
+            
+            // Auto-retry video playback every few seconds if paused
+            setInterval(() => {
+                const activePageVideos = document.querySelectorAll('.page-section.active video');
+                activePageVideos.forEach(video => {
+                    if (video.paused && video.autoplay) {
+                        video.play().catch(() => {
+                            // Silent fail, user interaction needed
+                        });
+                    }
+                });
+            }, 3000);
+        }
+        
+        function initializeNavigation() {
+            // Ensure all navigation functions are available
+            window.showPage = function(pageId) {
+                console.log('Switching to page:', pageId);
+                
+                // Hide all pages and pause their videos
+                const pages = document.querySelectorAll('.page-section');
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    // Pause videos in hidden pages
+                    const videos = page.querySelectorAll('video');
+                    videos.forEach(video => {
+                        video.pause();
+                    });
+                });
+                
+                // Show selected page
+                const targetPage = document.getElementById(pageId + '-page');
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    
+                    // Play videos in the active page after a short delay
+                    setTimeout(() => {
+                        playVideosInElement(targetPage);
+                    }, 100);
+                    
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    console.error('Page not found:', pageId + '-page');
+                }
+            };
+            
+            window.toggleMobileMenu = function() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu) {
+                    mobileMenu.classList.toggle('hidden');
+                }
+            };
+        }
+        
+        function initializeCart() {
+            let cart = [];
+            
+            // Make cart functions globally available
+            window.cart = cart;
+            
+            window.toggleCart = function() {
+                const cartSidebar = document.getElementById('cart-sidebar');
+                if (cartSidebar) {
+                    cartSidebar.classList.toggle('translate-x-full');
+                }
+            };
+            
+            window.addToCart = function(category, index) {
+                // Get item from jewelryData or create a simple item
+                let item;
+                if (typeof category === 'object') {
+                    // Direct item object passed
+                    item = category;
+                } else if (typeof category === 'string' && typeof index === 'number') {
+                    // Category and index passed
+                    const jewelryData = {
+                        rings: [
+                            { name: "Art Deco Ring", price: 2499.99, description: "Vintage-inspired art deco design" },
+                            { name: "Classic Plain Gold Band", price: 899.99, description: "Timeless classic gold band" },
+                            { name: "Engraved Gold Ring", price: 1299.99, description: "Beautiful hand-engraved gold ring" },
+                            { name: "Eternity Band", price: 3299.99, description: "Continuous diamonds around the band" },
+                            { name: "Gemstone in Gold", price: 1899.99, description: "Stunning gemstone set in premium gold" },
+                            { name: "Multi-Gemstone Gold Ring", price: 2199.99, description: "Multiple precious gemstones" },
+                            { name: "Gold Signet Ring", price: 1599.99, description: "Classic signet ring for personalization" },
+                            { name: "Halo Ring", price: 4299.99, description: "Center stone with brilliant diamond halo" },
+                            { name: "Infinity Gold Ring", price: 1199.99, description: "Symbol of eternal love in gold" },
+                            { name: "Matte Finish Gold Ring", price: 1099.99, description: "Modern matte finish design" },
+                            { name: "Classic Gold Ring", price: 799.99, description: "Essential gold ring for any collection" },
+                            { name: "Solitaire Diamond Ring", price: 5999.99, description: "Single brilliant diamond in classic setting" },
+                            { name: "Twisted Rope Gold Ring", price: 1399.99, description: "Unique twisted rope design" }
+                        ],
+                        chains: [
+                            { name: "Box Chain", price: 1599.99, description: "Classic box chain design" },
+                            { name: "Cable Chain", price: 1299.99, description: "Strong cable chain for pendants" },
+                            { name: "Curb Chain", price: 1799.99, description: "Heavy curb chain for bold statement" },
+                            { name: "Figaro Chain", price: 1499.99, description: "Classic figaro pattern chain" },
+                            { name: "Gold Necklace Chain", price: 2299.99, description: "Elegant gold necklace chain" },
+                            { name: "Premium Necklace Chain", price: 1899.99, description: "Premium chain for luxury pendants" },
+                            { name: "Deluxe Necklace Chain", price: 2199.99, description: "Deluxe multi-strand chain" },
+                            { name: "Designer Necklace Chain", price: 1999.99, description: "Designer chain with unique links" },
+                            { name: "Singapore Chain", price: 1699.99, description: "Twisted singapore chain" },
+                            { name: "Solid Flat Marine Chain", price: 2499.99, description: "Solid flat marine chain" }
+                        ],
+                        bangles: [
+                            { name: "Classic Bangle", price: 899.99, description: "Classic gold bangle" },
+                            { name: "Designer Bangle Set", price: 1599.99, description: "Set of designer bangles" },
+                            { name: "Premium Bangle Collection", price: 1899.99, description: "Premium collection of bangles" },
+                            { name: "Designer Bracelet", price: 1299.99, description: "Modern designer bracelet" },
+                            { name: "Diamond Bangle Luxury", price: 4299.99, description: "Luxury diamond-studded bangle" },
+                            { name: "Diamond Bangle Classic", price: 3799.99, description: "Classic diamond bangle" },
+                            { name: "Diamond Bangle Premium", price: 4199.99, description: "Premium diamond bangle" },
+                            { name: "Diamond Bangle Elegant", price: 3999.99, description: "Elegant diamond bangle" },
+                            { name: "Floral Gold Bangle", price: 1199.99, description: "Beautiful floral design" },
+                            { name: "Traditional Antique Bangle", price: 1499.99, description: "Traditional antique-style bangle" }
+                        ],
+                        earrings: [
+                            { name: "Diamond Earrings Classic", price: 2999.99, description: "Classic diamond studs" },
+                            { name: "Diamond Earrings Elegant", price: 3499.99, description: "Elegant diamond drops" },
+                            { name: "Diamond Earrings Luxury", price: 4299.99, description: "Luxury diamond cluster earrings" },
+                            { name: "Diamond Earrings Premium", price: 3799.99, description: "Premium diamond design" },
+                            { name: "Diamond Earrings Royal", price: 5299.99, description: "Royal collection chandelier earrings" },
+                            { name: "Gold Earrings Deluxe", price: 1299.99, description: "Deluxe gold earrings" },
+                            { name: "Gold Earrings Classic", price: 899.99, description: "Classic gold hoops" },
+                            { name: "Gold Earrings Traditional", price: 1099.99, description: "Traditional gold design" },
+                            { name: "Gold Earrings Modern", price: 1199.99, description: "Modern geometric gold earrings" },
+                            { name: "Gold Earrings Designer", price: 1399.99, description: "Designer gold earrings" },
+                            { name: "Platinum Earrings", price: 2799.99, description: "Luxurious platinum earrings" }
+                        ],
+                        anklets: [
+                            { name: "Delicate Anklet", price: 699.99, description: "Delicate chain anklet" },
+                            { name: "Classic Anklet", price: 599.99, description: "Classic gold anklet" },
+                            { name: "Premium Anklet", price: 899.99, description: "Premium anklet with intricate design" }
+                        ]
+                    };
+                    
+                    if (jewelryData[category] && jewelryData[category][index]) {
+                        item = jewelryData[category][index];
+                    } else {
+                        console.error('Item not found:', category, index);
+                        return;
+                    }
+                } else {
+                    console.error('Invalid parameters for addToCart');
+                    return;
+                }
+                
+                // Create cart item with unique ID
+                const cartItem = {
+                    id: Date.now() + Math.random(),
+                    name: item.name,
+                    price: item.price,
+                    description: item.description || '',
+                    category: category,
+                    quantity: 1
+                };
+                
+                // Check if item already exists in cart
+                const existingItem = cart.find(cartItem => cartItem.name === item.name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                    showNotification(`Updated ${item.name} quantity in cart`, 'success');
+                } else {
+                    cart.push(cartItem);
+                    showNotification(`${item.name} added to cart!`, 'success');
+                }
+                
+                updateCartDisplay();
+                
+                // Animate cart icon
+                const cartIcon = document.querySelector('#cart-count').parentElement;
+                cartIcon.classList.add('animate-bounce');
+                setTimeout(() => cartIcon.classList.remove('animate-bounce'), 1000);
+                
+                console.log('Item added to cart:', cartItem);
+                console.log('Current cart:', cart);
+            };
+            
+            window.buyNow = function(category, index) {
+                addToCart(category, index);
+                toggleCart();
+                showNotification('Item added to cart! Ready to checkout.', 'info');
+            };
+            
+            window.removeFromCart = function(itemId) {
+                const itemIndex = cart.findIndex(item => item.id === itemId);
+                if (itemIndex > -1) {
+                    const removedItem = cart[itemIndex];
+                    cart.splice(itemIndex, 1);
+                    updateCartDisplay();
+                    showNotification(`${removedItem.name} removed from cart`, 'info');
+                }
+            };
+            
+            window.clearCart = function() {
+                if (cart.length === 0) {
+                    showNotification('Cart is already empty', 'info');
+                    return;
+                }
+                
+                if (confirm('Are you sure you want to clear your cart?')) {
+                    cart.length = 0;
+                    updateCartDisplay();
+                    showNotification('Cart cleared successfully', 'success');
+                }
+            };
+            
+            window.checkout = function() {
+                if (cart.length === 0) {
+                    showNotification('Your cart is empty! Add some items first.', 'warning');
+                    return;
+                }
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                
+                // Simulate checkout process
+                showNotification('Processing your order...', 'info');
+                
+                setTimeout(() => {
+                    const orderNumber = Math.floor(Math.random() * 1000000) + 100000;
+                    showNotification(`Order #${orderNumber} placed successfully! Total: $${total.toFixed(2)} for ${itemCount} items.`, 'success');
+                    
+                    // Clear cart after successful checkout
+                    cart.length = 0;
+                    updateCartDisplay();
+                    toggleCart();
+                }, 2000);
+            };
+            
+            function updateCartDisplay() {
+                const cartCount = document.getElementById('cart-count');
+                const cartItems = document.getElementById('cart-items');
+                const cartTotal = document.getElementById('cart-total');
+                
+                if (!cartCount || !cartItems || !cartTotal) {
+                    console.error('Cart elements not found');
+                    return;
+                }
+                
+                // Update cart count
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'block' : 'none';
+                
+                // Update cart total
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotal.textContent = total.toFixed(2);
+                
+                // Update cart items display
+                if (cart.length === 0) {
+                    cartItems.innerHTML = `
+                        <div class="text-center py-8">
+                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 12H6L5 9z"></path>
+                            </svg>
+                            <p class="text-gray-500 text-lg">Your cart is empty</p>
+                            <p class="text-gray-400 text-sm mt-2">Add some beautiful jewelry to get started!</p>
+                        </div>
+                    `;
+                } else {
+                    cartItems.innerHTML = cart.map(item => `
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border hover:shadow-md transition-shadow">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-sm text-deep-black">${item.name}</h4>
+                                <p class="text-gray-600 text-xs mt-1">${item.description}</p>
+                                <div class="flex items-center justify-between mt-2">
+                                    <span class="text-luxury-gold font-bold">$${item.price.toFixed(2)}</span>
+                                    <span class="text-gray-500 text-xs">Qty: ${item.quantity}</span>
+                                </div>
+                            </div>
+                            <button onclick="removeFromCart('${item.id}')" class="ml-3 text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-full transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    `).join('');
+                }
+            }
+            
+            // Initialize cart display
+            updateCartDisplay();
+        }
+    </script>
+    <script src="src/jewelry-website.ts"></script>
+    <script src="src/jewelry-ecommerce.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Parcel cache
+.cache/
+.parcel-cache/
+
+# Build output
+/dist/
+
+# Environment files
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# VS Code settings
+.vscode/
+
+# Fonts and assets (if not to be tracked)
+assets/fonts/*.woff2
+assets/fonts/*.woff
+
+# Misc
+*.tmp
+*.bak
+
+# Ignore local config
+*.local.js
+*.local.tsnode_modules

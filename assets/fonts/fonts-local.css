@@ -1,0 +1,132 @@
+/* Local Google Fonts for Sahasra Jewels - Network Independent */
+/* Optional font files with comprehensive system fallbacks */
+
+/* Playfair Display Font Family - Optional Enhancement */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional; /* Won't block rendering if files missing */
+  src: local('Playfair Display Regular'), 
+       local('PlayfairDisplay-Regular'),
+       local('Times New Roman'),
+       local('Times'),
+       serif;
+  /* Removed file paths - will use system fonts if local fonts not available */
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: optional;
+  src: local('Playfair Display SemiBold'), 
+       local('PlayfairDisplay-SemiBold'),
+       local('Times New Roman Bold'),
+       local('Times Bold'),
+       serif;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: optional;
+  src: local('Playfair Display Bold'), 
+       local('PlayfairDisplay-Bold'),
+       local('Times New Roman Bold'),
+       local('Times Bold'),
+       serif;
+}
+
+/* Poppins Font Family - Optional Enhancement */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: optional;
+  src: local('Poppins Light'), 
+       local('Poppins-Light'),
+       local('Arial Light'),
+       local('Helvetica Light'),
+       local('Arial'),
+       local('Helvetica'),
+       sans-serif;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: local('Poppins Regular'), 
+       local('Poppins-Regular'),
+       local('Arial'),
+       local('Helvetica'),
+       sans-serif;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: optional;
+  src: local('Poppins Medium'), 
+       local('Poppins-Medium'),
+       local('Arial'),
+       local('Helvetica'),
+       sans-serif;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: optional;
+  src: local('Poppins SemiBold'), 
+       local('Poppins-SemiBold'),
+       local('Arial Bold'),
+       local('Helvetica Bold'),
+       local('Arial'),
+       local('Helvetica'),
+       sans-serif;
+}
+
+/* Enhanced System Font Fallbacks */
+.font-playfair, 
+.font-playfair * {
+  font-family: 'Playfair Display', 'Times New Roman', 'Times', 'Georgia', 'Cambria', 'Book Antiqua', serif !important;
+}
+
+.font-poppins,
+.font-poppins * {
+  font-family: 'Poppins', 'Arial', 'Helvetica', 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif !important;
+}
+
+/* Ensure consistent rendering across all browsers */
+body {
+  font-family: 'Poppins', 'Arial', 'Helvetica', 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
+}
+
+/* Typography optimization for system fonts */
+.font-playfair {
+  letter-spacing: 0.025em; /* Slightly increase letter spacing for system serif fonts */
+}
+
+.font-poppins {
+  letter-spacing: 0.01em; /* Optimize spacing for system sans-serif fonts */
+}
+
+/* Font Loading Optimization */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    font-display: block;
+  }
+}
+
+/* High-quality font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
