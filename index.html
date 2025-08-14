@@ -260,10 +260,64 @@
         }
         
         /* Price and Important Text - Gothic */
-        .price, .cart-total, .hero-description {
+        .price, .cart-total, .hero-description, .price-rupee {
             font-family: var(--font-elegant) !important;
             font-weight: 500;
             letter-spacing: 1px;
+        }
+        
+        /* Rupee Symbol Styling */
+        .rupee-symbol {
+            font-family: 'Segoe UI', 'Arial', sans-serif !important;
+            font-weight: 600;
+            display: inline-block;
+            transform: translateY(-1px);
+        }
+        
+        .price-rupee {
+            color: #D4AF37 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+        
+        /* Quantity Controls Styling */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(248, 250, 252, 0.8);
+            border-radius: 8px;
+            padding: 0.25rem;
+        }
+        
+        .quantity-btn {
+            background: #D4AF37;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: #B8941F;
+            transform: scale(1.1);
+        }
+        
+        .quantity {
+            font-weight: 600;
+            color: #2D2D2D;
+            min-width: 20px;
+            text-align: center;
+            font-size: 14px;
         }
         
         /* Loading Screen Text - Ultra Decorative */
@@ -1611,7 +1665,12 @@
             <div class="border-t pt-4 mt-auto">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-lg font-semibold">Total:</span>
-                    <span class="text-2xl font-bold text-luxury-gold">$<span id="cart-total">0.00</span></span>
+                    <span class="text-2xl font-bold text-luxury-gold" id="cart-total">
+                        <span class="flex items-center gap-1">
+                            <span class="rupee-symbol" style="font-family: 'Segoe UI', 'Arial', sans-serif;">₹</span>
+                            0
+                        </span>
+                    </span>
                 </div>
                 <div class="space-y-3">
                     <button onclick="whatsappCheckout()" class="whatsapp-checkout w-full text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2">
@@ -2462,17 +2521,19 @@
                     return;
                 }
 
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const total = cart.reduce((sum, item) => sum + (getNumericPricePerGram(item.category) * item.quantity), 0);
                 
                 let message = "🌟 *Crystal Jewels Order* 🌟\n\n";
                 message += "💎 *Selected Items:*\n";
                 
                 cart.forEach(item => {
-                    message += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+                    const itemTotal = getNumericPricePerGram(item.category) * item.quantity;
+                    message += `• ${item.name} x${item.quantity} - ₹${itemTotal.toLocaleString('en-IN')}\n`;
+                    message += `  (1 gram = ₹${getPricePerGram(item.category)})\n`;
                     message += `  ${item.description}\n\n`;
                 });
                 
-                message += `💰 *Total Amount: $${total.toFixed(2)}*\n\n`;
+                message += `💰 *Total Amount: ₹${total.toLocaleString('en-IN')}*\n\n`;
                 message += "🚚 *Delivery Information:*\n";
                 message += "• Free delivery within 3-5 business days\n";
                 message += "• Express delivery available (24-48 hours)\n";
@@ -2495,6 +2556,30 @@
             // Save cart to localStorage
             function saveCart() {
                 localStorage.setItem('jewelryCart', JSON.stringify(cart));
+            }
+
+            // Helper function for price per gram display
+            function getPricePerGram(category) {
+                switch (category) {
+                    case 'rings': return '5,000';
+                    case 'chains': return '6,500';
+                    case 'anklets': return '4,800';
+                    case 'bangles': return '5,800';
+                    case 'earrings': return '5,200';
+                    default: return '5,000';
+                }
+            }
+
+            // Helper function to get numeric price per gram for calculations
+            function getNumericPricePerGram(category) {
+                switch (category) {
+                    case 'rings': return 5000;
+                    case 'chains': return 6500;
+                    case 'anklets': return 4800;
+                    case 'bangles': return 5800;
+                    case 'earrings': return 5200;
+                    default: return 5000;
+                }
             }
 
             // Update cart badge
@@ -2523,9 +2608,14 @@
                 cartCount.textContent = totalItems;
                 cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
                 
-                // Update cart total
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                cartTotal.textContent = total.toFixed(2);
+                // Update cart total using INR pricing
+                const total = cart.reduce((sum, item) => sum + (getNumericPricePerGram(item.category) * item.quantity), 0);
+                cartTotal.innerHTML = `
+                    <span class="flex items-center gap-1">
+                        <span class="rupee-symbol" style="font-family: 'Segoe UI', 'Arial', sans-serif;">₹</span>
+                        ${total.toLocaleString('en-IN')}
+                    </span>
+                `;
                 
                 // Enhanced cart items display
                 if (cart.length === 0) {
@@ -2546,7 +2636,10 @@
                                 <h4 class="font-semibold text-deep-black">${item.name}</h4>
                                 <p class="text-sm text-gray-500">${item.description}</p>
                                 <div class="flex items-center justify-between mt-2">
-                                    <span class="text-luxury-gold font-bold">$${item.price}</span>
+                                    <span class="price-rupee text-lg font-bold text-luxury-gold flex items-center gap-1">
+                                        <span class="rupee-symbol" style="font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 1.2em;">₹</span>
+                                        1 gram = ₹${getPricePerGram(item.category)}
+                                    </span>
                                     <div class="quantity-controls">
                                         <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})" class="quantity-btn">-</button>
                                         <span class="quantity">${item.quantity}</span>

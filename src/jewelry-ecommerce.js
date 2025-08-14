@@ -400,9 +400,14 @@ function updateCartDisplay() {
     cartCount.textContent = totalItems;
     cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
     
-    // Update cart total
-    cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotalElement.textContent = cartTotal.toFixed(2);
+    // Update cart total using INR pricing
+    cartTotal = cart.reduce((sum, item) => sum + (getNumericPricePerGram(item.category) * item.quantity), 0);
+    cartTotalElement.innerHTML = `
+        <span class="flex items-center gap-1">
+            <span class="rupee-symbol" style="font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 1.2em;">₹</span>
+            ${cartTotal.toLocaleString('en-IN')}
+        </span>
+    `;
     
     // Enhanced cart items display
     if (cart.length === 0) {
@@ -423,7 +428,10 @@ function updateCartDisplay() {
                     <h4 class="font-semibold text-deep-black">${item.name}</h4>
                     <p class="text-sm text-gray-500">${item.description || ''}</p>
                     <div class="flex items-center justify-between mt-2">
-                        <span class="text-luxury-gold font-bold">$${item.price.toFixed(2)}</span>
+                        <span class="price-rupee text-lg font-bold text-luxury-gold flex items-center gap-1">
+                            <span class="rupee-symbol" style="font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 1.2em; vertical-align: middle;">₹</span>
+                            1 gram = ₹${getPricePerGram(item.category)}
+                        </span>
                         <div class="quantity-controls">
                             <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" class="quantity-btn">-</button>
                             <span class="quantity">${item.quantity}</span>
@@ -500,17 +508,19 @@ function whatsappCheckout() {
         return;
     }
 
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = cart.reduce((sum, item) => sum + (getNumericPricePerGram(item.category) * item.quantity), 0);
     
     let message = "🌟 *Crystal Jewels Order* 🌟\n\n";
     message += "💎 *Selected Items:*\n";
     
     cart.forEach(item => {
-        message += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+        const itemTotal = getNumericPricePerGram(item.category) * item.quantity;
+        message += `• ${item.name} x${item.quantity} - ₹${itemTotal.toLocaleString('en-IN')}\n`;
+        message += `  (1 gram = ₹${getPricePerGram(item.category)})\n`;
         message += `  ${item.description || 'Beautiful jewelry piece'}\n\n`;
     });
     
-    message += `💰 *Total Amount: $${total.toFixed(2)}*\n\n`;
+    message += `💰 *Total Amount: ₹${total.toLocaleString('en-IN')}*\n\n`;
     message += "🚚 *Delivery Information:*\n";
     message += "• Free delivery within 3-5 business days\n";
     message += "• Express delivery available (24-48 hours)\n";
@@ -597,7 +607,10 @@ function populateGrid(category, items) {
                 <p class="text-gray-600 text-sm mb-4">${item.description}</p>
                 
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl font-bold text-luxury-gold">$${item.price.toFixed(2)}</span>
+                        <span class="price-rupee text-xl font-bold text-luxury-gold flex items-center gap-1">
+                            <span class="rupee-symbol" style="font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 1.3em; vertical-align: middle;">₹</span>
+                            1 gram = ₹${getPricePerGram(category)}
+                        </span>
                     <div class="flex items-center space-x-1 text-yellow-400">
                         ${generateStars(5)}
                     </div>
@@ -638,8 +651,29 @@ function populateGrid(category, items) {
         }
     });
 }
+// Helper function for price per gram
+function getPricePerGram(category) {
+    switch (category) {
+        case 'rings': return '5,000';
+        case 'chains': return '6,500';
+        case 'anklets': return '4,800';
+        case 'bangles': return '5,800';
+        case 'earrings': return '5,200';
+        default: return '5,000';
+    }
+}
 
-function generateStars(count) {
+// Helper function to get numeric price per gram for calculations
+function getNumericPricePerGram(category) {
+    switch (category) {
+        case 'rings': return 5000;
+        case 'chains': return 6500;
+        case 'anklets': return 4800;
+        case 'bangles': return 5800;
+        case 'earrings': return 5200;
+        default: return 5000;
+    }
+}function generateStars(count) {
     let stars = '';
     for (let i = 0; i < count; i++) {
         stars += '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
